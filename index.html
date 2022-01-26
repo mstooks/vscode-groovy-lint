@@ -1,0 +1,892 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Visual Studio Code extension to format and auto-fix Groovy, Jenkinsfile and Gradle files">
+      
+      
+        <meta name="author" content="Nicolas Vuillamy">
+      
+      
+        <link rel="canonical" href="https://nvuillam.github.io/vscode-groovy-lint/">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.8">
+    
+    
+      
+        <title>VS Code Groovy Lint</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6e60f8b8.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vscode-groovy-lint-format-and-fix" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="VS Code Groovy Lint" class="md-header__button md-logo" aria-label="VS Code Groovy Lint" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            VS Code Groovy Lint
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nvuillam/vscode-groovy-lint/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="VS Code Groovy Lint" class="md-nav__button md-logo" aria-label="VS Code Groovy Lint" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    VS Code Groovy Lint
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nvuillam/vscode-groovy-lint/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extension-settings" class="md-nav__link">
+    Extension Settings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribute" class="md-nav__link">
+    Contribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special-thanks" class="md-nav__link">
+    Special Thanks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-notes" class="md-nav__link">
+    Release Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="Release Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#130-2020-11-15" class="md-nav__link">
+    [1.3.0] 2020-11-15
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#127-2020-09-04" class="md-nav__link">
+    [1.2.7] 2020-09-04
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#126-2020-09-02" class="md-nav__link">
+    [1.2.6] 2020-09-02
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-2020-08-29" class="md-nav__link">
+    [1.2.3] 2020-08-29
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-2020-08-21" class="md-nav__link">
+    [1.2.2] 2020-08-21
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#120-2020-08-15" class="md-nav__link">
+    [1.2.0] 2020-08-15
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#111-2020-08-11" class="md-nav__link">
+    [1.1.1] 2020-08-11
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110-2020-08-10" class="md-nav__link">
+    [1.1.0] 2020-08-10
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#previous-versions" class="md-nav__link">
+    PREVIOUS VERSIONS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="#features" class="md-nav__link">
+        Features
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="#extension-settings" class="md-nav__link">
+        Extension settings
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="#contribute" class="md-nav__link">
+        Contribute
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="#special-thanks" class="md-nav__link">
+        Special thanks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="#release-notes" class="md-nav__link">
+        Release notes
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extension-settings" class="md-nav__link">
+    Extension Settings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribute" class="md-nav__link">
+    Contribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special-thanks" class="md-nav__link">
+    Special Thanks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-notes" class="md-nav__link">
+    Release Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="Release Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#130-2020-11-15" class="md-nav__link">
+    [1.3.0] 2020-11-15
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#127-2020-09-04" class="md-nav__link">
+    [1.2.7] 2020-09-04
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#126-2020-09-02" class="md-nav__link">
+    [1.2.6] 2020-09-02
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-2020-08-29" class="md-nav__link">
+    [1.2.3] 2020-08-29
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-2020-08-21" class="md-nav__link">
+    [1.2.2] 2020-08-21
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#120-2020-08-15" class="md-nav__link">
+    [1.2.0] 2020-08-15
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#111-2020-08-11" class="md-nav__link">
+    [1.1.1] 2020-08-11
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110-2020-08-10" class="md-nav__link">
+    [1.1.0] 2020-08-10
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#previous-versions" class="md-nav__link">
+    PREVIOUS VERSIONS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/nvuillam/vscode-groovy-lint/tree/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<!-- markdownlint-disable MD033 -->
+<h1 id="vscode-groovy-lint-format-and-fix">VsCode Groovy Lint, Format and Fix</h1>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint"><img alt="Version" src="https://vsmarketplacebadge.apphb.com/version/NicolasVuillamy.vscode-groovy-lint.svg" /></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint"><img alt="Installs" src="https://vsmarketplacebadge.apphb.com/installs/NicolasVuillamy.vscode-groovy-lint.svg" /></a>
+<a href="https://github.com/nvuillam/vscode-groovy-lint/actions?query=workflow%3ATest+branch%3Amaster"><img alt="Test" src="https://github.com/nvuillam/vscode-groovy-lint/workflows/Test/badge.svg?branch=master" /></a>
+<a href="https://github.com/nvuillam/mega-linter#readme"><img alt="Mega-Linter" src="https://github.com/nvuillam/vscode-groovy-lint/workflows/Mega-Linter/badge.svg?branch=master" /></a>
+<a href="https://github.com/nvuillam/vscode-groovy-lint/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/nvuillam/vscode-groovy-lint.png" /></a>
+<a href="https://GitHub.com/nvuillam/vscode-groovy-lint/stargazers/"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nvuillam/vscode-groovy-lint.png?label=Star&amp;maxAge=2592000" /></a>
+<a href="http://makeapullrequest.com"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.png?style=flat-square" /></a></p>
+<p><strong>Lint</strong> (code quality), <strong>Format</strong> and <strong>Auto-fix</strong> your groovy files and Jenkinsfile</p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint">Visual Studio Code extension</a> embedding <a href="https://github.com/nvuillam/npm-groovy-lint#README">npm-groovy-lint</a>, itself embedding <a href="https://codenarc.github.io/CodeNarc/">CodeNarc</a></p>
+<ul>
+<li>You can <a href="https://github.com/nvuillam/npm-groovy-lint#configuration">configure the rules</a> by defining a <code>.groovylintrc.json</code> file</li>
+<li>If you use <strong>CI</strong>, you can integrate <a href="https://github.com/nvuillam/mega-linter#readme">Mega-Linter</a> in your workflow, to <strong>make sure all your sources (groovy and other) are clean</strong></li>
+</ul>
+<p><img alt="image" src="https://github.com/nvuillam/vscode-groovy-lint/raw/master/images/vscode-anim.gif" /></p>
+<h2 id="features">Features</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Access</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Analyze code</strong></td>
+<td>Lint the code of the current file</td>
+<td>Ctrl+Shit+F9<br/>Contextual</br>Status bar<br/>Commands</td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td>Format the code of the current file</td>
+<td>Shift+Alt+F<br/>Contextual</br>Commands</td>
+</tr>
+<tr>
+<td><strong>Fix all auto-fixable problems</strong></td>
+<td>Fix the code of the current file</td>
+<td>Contextual</br>Commands</td>
+</tr>
+<tr>
+<td><strong>Lint folder</strong></td>
+<td>Lint all applicable files of a folder</td>
+<td>Contextual</td>
+</tr>
+<tr>
+<td>Fix single error</td>
+<td>Apply quick fix for a single problem</td>
+<td>Quick Fix<br/>Diagnostic</td>
+</tr>
+<tr>
+<td>Fix <em>rule</em> in entire file</td>
+<td>Apply quick fix for all problems related to the same rule in the current file</td>
+<td>Quick Fix<br/>Diagnostic</td>
+</tr>
+<tr>
+<td>Disable <em>rule</em> for this line</td>
+<td>Disable rule only for current line</td>
+<td>Quick Fix<br/>Diagnostic</td>
+</tr>
+<tr>
+<td>Disable <em>rule</em> for this entire file</td>
+<td>Disable rule in the entire file</td>
+<td>Quick Fix<br/>Diagnostic</td>
+</tr>
+<tr>
+<td>Disable <em>rule</em> for this entire project</td>
+<td>Updates configuration file<br/>(usually <code>.groovylintrc.js</code> in root folder) to disable this rule)</td>
+<td>Quick Fix<br/>Diagnostic</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong><em>Contextual</em></strong>: <em>right click in source code or on folder</em></li>
+<li><strong><em>Commands</em></strong>: <em>Ctrl+Shift+P then type command name</em></li>
+<li><strong><em>Status bar</em></strong>: <em>GroovyLint status item at the bottom right</em></li>
+<li><strong><em>Quick Fix</em></strong>: <em>Hover an underlined part of the code after a lint, click Quick Fix then select action to perform</em></li>
+<li><strong><em>Diagnostic</em></strong>: <em>Right click on a diagnostic in Problems section</em></li>
+</ul>
+<h2 id="extension-settings">Extension Settings</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>groovyLint.enable</code></td>
+<td>Controls whether GroovyLint is enabled or not</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>groovyLint.lint.trigger</code></td>
+<td>Run the linter on save (onSave), on type (onType) , or on user request</td>
+<td>onSave</td>
+</tr>
+<tr>
+<td><code>groovyLint.format.enable</code></td>
+<td>Controls whether the groovy formatter is enabled or not</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>groovyLint.fix.enable</code></td>
+<td>Run the auto-fixer on save (onSave), on type (onType) , or on user request</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>groovyLint.fix.trigger</code></td>
+<td>Run the fixer on save (onSave), or on user request</td>
+<td>user</td>
+</tr>
+<tr>
+<td><code>groovyLint.basic.loglevel</code></td>
+<td>Linting error level (error, warning,info)</td>
+<td>info</td>
+</tr>
+<tr>
+<td><code>groovyLint.basic.verbose</code></td>
+<td>Turn on to have verbose logs</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>groovyLint.basic.config</code></td>
+<td><a href="https://github.com/nvuillam/npm-groovy-lint#configuration">NPM groovy lint configuration file</a></td>
+<td>.groovylintrc.json</td>
+</tr>
+<tr>
+<td><code>groovyLint.debug.enable</code></td>
+<td>Display more logs in VsCode Output panel (select "GroovyLint") for issue investigation</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>groovyLint.java.executable</code></td>
+<td>Override java executable to use <br/>Example: C:\Program Files\Java\jdk1.8.0_144\bin\java.exe</td>
+<td>java</td>
+</tr>
+<tr>
+<td><code>groovyLint.java.options</code></td>
+<td>Override java options to use</td>
+<td>"-Xms256m,-Xmx2048m"</td>
+</tr>
+<tr>
+<td><code>groovyLint.insight.enable</code></td>
+<td>Allow to send anonymous usage statistics used only to improve the tool (we will of course never send your code)</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li><a href="https://nodejs.org"><strong>Node.js</strong></a> version <strong>12 or higher</strong> is required to run this extension. If you can't upgrade, you can use <a href="https://github.com/nvm-sh/nvm">nvm</a> to have <a href="https://www.sitepoint.com/quick-tip-multiple-versions-node-nvm/">different node versions on your computer</a></li>
+</ul>
+<ul>
+<li><a href="https://www.java.com/download"><strong>Java</strong></a> version <strong>8 or higher</strong> is required to run this extension</li>
+</ul>
+<ul>
+<li>As CodeNarc is run in background with java/groovy, performances could be improved on large files (do not hesitate to provide advices !)
+But do not worry, as the groovy linting is provided by a background local server, your VsCode won't be slowed.</li>
+</ul>
+<h2 id="contribute">Contribute</h2>
+<p>Contributions are very welcome on :</p>
+<ul>
+<li><a href="https://github.com/nvuillam/vscode-groovy-lint">VsCode Groovy Lint</a></li>
+<li><a href="https://github.com/nvuillam/npm-groovy-lint">NPM Groovy Lint</a> (linter called by this extension)</li>
+</ul>
+<p>Please follow <a href="https://github.com/nvuillam/vscode-groovy-lint/blob/master/CONTRIBUTING.md">Contribution instructions</a></p>
+<h2 id="special-thanks">Special Thanks</h2>
+<ul>
+<li><a href="https://github.com/yuvmel">yuvmel</a>, for his great support on <a href="https://github.com/nvuillam/vscode-groovy-lint/issues/18">#18</a> that allowed VsCode Groovy Lint to work much better on Mac, Linux, and with other diagnostic extensions</li>
+</ul>
+<h2 id="release-notes">Release Notes</h2>
+<h3 id="130-2020-11-15">[1.3.0] 2020-11-15</h3>
+<ul>
+<li>Upgrade to <a href="https://www.npmjs.com/package/npm-groovy-lint">npm-groovy-lint</a> v8.0.0<ul>
+<li>Upgrade to CodeNarc 2.0.0</li>
+<li>Improve performances</li>
+<li>Fix bugs</li>
+</ul>
+</li>
+</ul>
+<h3 id="127-2020-09-04">[1.2.7] 2020-09-04</h3>
+<ul>
+<li>Upgrade to <a href="https://www.npmjs.com/package/npm-groovy-lint">npm-groovy-lint</a> v7.5.4</li>
+</ul>
+<h3 id="126-2020-09-02">[1.2.6] 2020-09-02</h3>
+<ul>
+<li>Upgrade to <a href="https://www.npmjs.com/package/npm-groovy-lint">npm-groovy-lint</a> v7.5.2</li>
+<li>Fix crash when empty groovy file</li>
+<li>Fix crash when non-sense groovy file</li>
+</ul>
+<h3 id="123-2020-08-29">[1.2.3] 2020-08-29</h3>
+<ul>
+<li>Fix bug on Windows when username contains space(s)</li>
+</ul>
+<h3 id="122-2020-08-21">[1.2.2] 2020-08-21</h3>
+<ul>
+<li>Allow user to hide future npm-groovy-lint error messages</li>
+<li>Manage correctly user choice <code>Never</code> for tabs auto-replacement by spaces</li>
+<li>Upgrade to <a href="https://www.npmjs.com/package/npm-groovy-lint">npm-groovy-lint</a> v7.4.0</li>
+</ul>
+<h3 id="120-2020-08-15">[1.2.0] 2020-08-15</h3>
+<ul>
+<li>Upgrade to <a href="https://www.npmjs.com/package/npm-groovy-lint">npm-groovy-lint</a> v7.3.0<ul>
+<li>Allow to link to <a href="https://codenarc.github.io/CodeNarc/codenarc-creating-ruleset.html">CodeNarc RuleSet files</a> from <code>.groovylintrc.json</code>, using property <code>"codenarcRulesets"</code>. Warning: doing so means that all other properties of config file will be ignored.</li>
+</ul>
+</li>
+</ul>
+<h3 id="111-2020-08-11">[1.1.1] 2020-08-11</h3>
+<ul>
+<li>Upgrade to <a href="https://www.npmjs.com/package/npm-groovy-lint">npm-groovy-lint</a> v7.2.0<ul>
+<li>Upgrade<a href="https://www.npmjs.com/package/java-caller">java-caller</a> to v2.0.0 : better performances</li>
+</ul>
+</li>
+</ul>
+<h3 id="110-2020-08-10">[1.1.0] 2020-08-10</h3>
+<ul>
+<li>Upgrade to <a href="https://www.npmjs.com/package/npm-groovy-lint">npm-groovy-lint</a> v7.1.0<ul>
+<li>Externalize JavaCaller class into a separate package <a href="https://www.npmjs.com/package/java-caller">java-caller</a> and use it</li>
+</ul>
+</li>
+</ul>
+<h3 id="previous-versions">PREVIOUS VERSIONS</h3>
+<p>See complete <a href="https://github.com/nvuillam/vscode-groovy-lint/blob/master/CHANGELOG.md">CHANGELOG</a></p>
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 <a href="https://github.com/nvuillam">Nicolas Vuillamy</a>
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/nvuillam/vscode-groovy-lint/issues" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863V300c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363C184.846 131.491 214.94 112 261.794 112c49.071 0 101.45 38.304 101.45 88.8zM298 368c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/nvuillam/vscode-groovy-lint" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/nvuillam" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.22074ed6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.960e086b.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>
